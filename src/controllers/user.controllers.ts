@@ -60,3 +60,13 @@ export const signup = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'something went wrong.' })
   }
 }
+
+export const getAllUsers = async(req: Request, res: Response) => {
+  try {
+    const allUsers = await User.find({}, 'name email')
+    if (!allUsers.length) return res.status(404).json({ message: 'No users found' })
+    return res.status(200).json({ users: allUsers})
+  } catch (err) {
+    return res.status(500).json({ message: 'something went wrong.' })
+  }
+}
