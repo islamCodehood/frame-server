@@ -5,9 +5,12 @@ import mongoose from 'mongoose'
 import userRoutes from './routes/user.routes'
 // import storyRoutes from "./routes/story.routes";
 import dotenv from 'dotenv'
+import helmet from "helmet";
+import morgan from "morgan";
 
 const app = express()
-
+app.use(morgan("dev"));
+app.use(helmet());
 dotenv.config()
 
 app.use(express.json({ limit: '30mb', strict: true }))
