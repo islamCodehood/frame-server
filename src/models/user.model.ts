@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   id: String,
+  favoriteGenres: Array,
+  followers: Array,
+  following: Array,
+  movies: Array,
+  wantToWatch: Array,
+  lists: Array,
 })
 
 export default mongoose.model('User', userSchema)
