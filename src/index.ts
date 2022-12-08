@@ -3,7 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 // import movieRoutes from "./routes/movie.routes";
 import userRoutes from './routes/user.routes'
-// import storyRoutes from "./routes/story.routes";
+import storyRoutes from "./routes/story.routes";
 import dotenv from 'dotenv'
 import helmet from "helmet";
 import morgan from "morgan";
@@ -23,7 +23,7 @@ app.use(cors())
 //user route
 app.use('/user', userRoutes)
 // app.use("/story", storyRoutes);
-
+app.use('/story', storyRoutes)
 app.get('/', (req, res) => {
   res.send('Hello')
 })
@@ -37,3 +37,5 @@ mongoose
   .catch((err) => {
     console.log(err.message)
   })
+
+  
