@@ -1,5 +1,5 @@
 import express from 'express'
-import {getStories} from '../controllers/story.controllers'
+import { getStories } from '../controllers/story.controllers'
 
 const router = express.Router()
 

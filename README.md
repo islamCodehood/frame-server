@@ -1,5 +1,7 @@
 # frame-server
+
 ## User Model
+
 - id
 - name
 - email
@@ -9,6 +11,7 @@
 - lists
 - followers
 - following
+
 ```
 {
   id,

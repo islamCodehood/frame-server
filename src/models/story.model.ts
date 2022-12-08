@@ -24,7 +24,7 @@ const storySchema = new mongoose.Schema({
   source: {
     type: String,
     required: true,
-  }
+  },
 })
 
 export default mongoose.model('Story', storySchema)

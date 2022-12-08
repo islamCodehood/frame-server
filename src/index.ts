@@ -3,14 +3,14 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 // import movieRoutes from "./routes/movie.routes";
 import userRoutes from './routes/user.routes'
-import storyRoutes from "./routes/story.routes";
+import storyRoutes from './routes/story.routes'
 import dotenv from 'dotenv'
-import helmet from "helmet";
-import morgan from "morgan";
+import helmet from 'helmet'
+import morgan from 'morgan'
 
 const app = express()
-app.use(morgan("dev"));
-app.use(helmet());
+app.use(morgan('dev'))
+app.use(helmet())
 dotenv.config()
 
 app.use(express.json({ limit: '30mb', strict: true }))
@@ -37,5 +37,3 @@ mongoose
   .catch((err) => {
     console.log(err.message)
   })
-
-  
