@@ -9,6 +9,7 @@ import {
   removeFollow,
   getFollowers,
   getFollowing,
+  addReview
 } from '../controllers/user.controllers'
 
 const router = express.Router()
@@ -23,4 +24,5 @@ router.patch('/remove-follow/:id', removeFollow)
 router.delete('/remove-user/:id', removeUser)
 router.get('/:id/followers', getFollowers)
 router.get('/:id/following', getFollowing)
+router.post('/:id/review', addReview)
 export default router
