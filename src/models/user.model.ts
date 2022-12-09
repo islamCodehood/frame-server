@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema({
   movies: Array,
   wantToWatch: Array,
   lists: Array,
+  reviews: Array,
+  ratings: Array,
 })
 
 export default mongoose.model('User', userSchema)
