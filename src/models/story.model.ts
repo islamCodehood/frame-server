@@ -25,6 +25,10 @@ const storySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  url: {
+    type: String,
+    required: true,
+  }
 })
 
 export default mongoose.model('Story', storySchema)
