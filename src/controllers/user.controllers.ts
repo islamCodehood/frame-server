@@ -182,3 +182,26 @@ export const getFollowing = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'something wrong happened' })
   }
 }
+
+
+
+export const addReview = async (req: Request, res: Response) => {
+  const {userId, review} = req.body
+  const {id} = req.params
+  try {
+    if (!userId || !review || !id) return res.status(500).json({ message: 'Either userId, review, or movieId is not specified' })
+    const user = await User.findOne({_id: userId})
+    if (!user) return res.status(404).json({ message: 'user not found'})
+    user.reviews.push({id, review})
+    await user.save()
+    return res.status(200).json({ message: 'review added'})
+  } catch (error) {
+    return res.status(500).json({ message: 'something wrong happened' })
+  }
+}
+export const createList = async (req: Request, res: Response) => {
+
+}
+export const wantToWatch = async (req: Request, res: Response) => {
+
+}
