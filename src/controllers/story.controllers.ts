@@ -33,13 +33,23 @@ const getHyperRealFilm = async () => {
         '.BlogList-item-meta .Blog-meta-item--date'
       )?.textContent
 
-      return { imagePath, link, title, excerpt, date, id: '', source: '', url: '' }
+      return {
+        imagePath,
+        link,
+        title,
+        excerpt,
+        date,
+        id: '',
+        source: '',
+        url: '',
+      }
     })
   }, blogItem)
   const finalArticles = articles.map((article) => ({
     ...article,
     id: uuidv4(),
-    source: 'HyperRealFilm', url: url
+    source: 'HyperRealFilm',
+    url: url,
   }))
   console.log(finalArticles)
   await browser.close()
@@ -73,7 +83,16 @@ const getMubi = async () => {
       const excerpt = item?.querySelector('.e7g0h937')?.textContent
       const date = item?.querySelector('time')?.textContent
       console.log(imagePath)
-      return { imagePath, link, title, excerpt, date, id: '', source: '', url: '' }
+      return {
+        imagePath,
+        link,
+        title,
+        excerpt,
+        date,
+        id: '',
+        source: '',
+        url: '',
+      }
     })
   }, blogItem)
   const finalArticles = articles
@@ -88,8 +107,8 @@ export const getStories = async (req: Request, res: Response) => {
     const stories = await Story.find()
     //randomize array
     for (let i = 0; i < stories.length; i++) {
-      const random = Math.floor(Math.random() * stories.length);
-      [stories[i], stories[random]] = [stories[random], stories[i]]
+      const random = Math.floor(Math.random() * stories.length)
+      ;[stories[i], stories[random]] = [stories[random], stories[i]]
     }
     return res.status(200).json({ stories })
   } catch (error) {
@@ -113,7 +132,6 @@ export const saveStories = async () => {
   }
 }
 // saveStories()
-
 
 setInterval(() => {
   console.log('saving data...')

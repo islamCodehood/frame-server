@@ -9,7 +9,7 @@ import {
   removeFollow,
   getFollowers,
   getFollowing,
-  addReview
+  addReview,
 } from '../controllers/user.controllers'
 
 const router = express.Router()
