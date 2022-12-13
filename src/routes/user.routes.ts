@@ -12,7 +12,7 @@ import {
   addReview,
   createList,
   addToWantToWatch,
-  addToWatchedMovies
+  addToWatchedMovies,
 } from '../controllers/user.controllers'
 
 const router = express.Router()
