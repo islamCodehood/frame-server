@@ -184,21 +184,85 @@ export const getFollowing = async (req: Request, res: Response) => {
 }
 
 export const addReview = async (req: Request, res: Response) => {
-  const { userId, review } = req.body
+  const { movieId, review } = req.body
   const { id } = req.params
   try {
-    if (!userId || !review || !id)
+    if (!movieId || !review || !id)
       return res
         .status(500)
         .json({ message: 'Either userId, review, or movieId is not specified' })
-    const user = await User.findOne({ _id: userId })
+    const user = await User.findOne({ _id: id })
     if (!user) return res.status(404).json({ message: 'user not found' })
-    user.reviews.push({ id, review })
+    user.reviews.push({ id: movieId, review })
     await user.save()
     return res.status(200).json({ message: 'review added' })
   } catch (error) {
     return res.status(500).json({ message: 'something wrong happened' })
   }
 }
-export const createList = async (req: Request, res: Response) => {}
-export const wantToWatch = async (req: Request, res: Response) => {}
+
+export const rate = async (req: Request, res: Response) => {
+  const { movieId, rating } = req.body
+  const { id } = req.params
+  try {
+    if (!movieId || !rating || !id)
+      return res
+        .status(500)
+        .json({ message: 'Either userId, rating, or movieId is not specified' })
+  } catch (error) {
+  }
+}
+
+export const createList = async (req: Request, res: Response) => {
+  //list title
+  //movies array [{id: 1, title: '', posterURL: ''}]
+  const {title, movies} = req.body
+  const {id} = req.params
+  try {
+    const user = await User.findOne({ _id: id })
+    if (!user) return res.status(404).json({ message: 'User not found' })
+    user.lists.push({title, movies})
+    user.save()
+    return res.status(201).json({message: 'List created'})
+  } catch (error) {
+    return res.status(500).json({ message: 'something went wrong'})
+  }
+}
+
+export const addToWantToWatch = async (req: Request, res: Response) => {
+  const {movieId, title, posterURL} = req.body
+  const { id } = req.params
+  try {
+    const user = await User.findOne({ _id: id })
+    if (!user) return res.status(404).json({ message: 'User not found' })
+    const wantToWatch = user.wantToWatch
+    if (wantToWatch.find(movie => movie.id === movieId)) return res.json({message: "Movie is already in list"})
+    const watchedMovies = user.movies
+    user.movies = watchedMovies.filter(movie => movie.id !== movieId)
+    wantToWatch.push({id: movieId, title, posterURL})
+    await user.save() 
+    res.status(200).json({message: 'added to want to watch'})
+  } catch (error) {
+    res.status(500).json({message: 'something went wrong'})
+  }
+}
+
+export const addToWatchedMovies = async (req: Request, res: Response) => {
+  const {movieId, title, posterURL} = req.body
+  const { id } = req.params
+  try {
+    const user = await User.findOne({ _id: id })
+    if (!user) return res.status(404).json({ message: 'User not found' })
+    const watchedMovies = user.movies
+    if (watchedMovies.find(movie => movie.id === movieId)) return res.json({message: "Movie is already in list"})
+    const wantToWatch = user.wantToWatch
+    user.wantToWatch = wantToWatch.filter(movie => movie.id !== movieId)
+    watchedMovies.push({id: movieId, title, posterURL})
+    await user.save()
+    res.status(200).json({message: 'added to watched movies'})
+  } catch (error) {
+    res.status(500).json({message: 'something went wrong'})
+  }
+}
+
+
