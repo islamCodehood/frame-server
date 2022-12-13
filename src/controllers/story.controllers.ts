@@ -131,7 +131,7 @@ export const saveStories = async () => {
     console.log(error)
   }
 }
-saveStories()
+// saveStories()
 
 // setInterval(() => {
 //   console.log('saving data...')
